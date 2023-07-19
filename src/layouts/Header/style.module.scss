@@ -1,0 +1,119 @@
+@import '../../styles/globals.scss';
+
+@mixin border-bottom($color) {
+  border-bottom: 2px solid $color;
+}
+
+.MainContainer {
+  width: 100%;
+  max-width: 1320px;
+}
+
+.HeaderWrapper {
+  padding: 20px 20px 24px;
+}
+
+.Header {
+  margin: 0 auto;
+  align-items: center;
+
+  h1 {
+    display: flex;
+    min-width: 142px;
+    width: 142px;
+    cursor: pointer;
+    transition: opacity 200ms ease-in;
+
+    img {
+        width: 100%;
+    }
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  &List {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    font-size: 1.2rem;
+    color: $dark_blue_text;
+    white-space: nowrap;
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &Cta {
+    button:first-child {
+      margin-left: 20px;
+      margin-right: 10px;
+    }
+  }
+}
+
+.Navigation {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1060px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  &List {
+    display: flex;
+    white-space: nowrap;
+    font-family: $YuGothicBold;
+    font-weight: bold;
+    color: $dark_blue_text;
+    gap: 50px;
+
+    .ListItem {
+      padding: 0;
+
+      a {
+        padding-bottom: 8px;
+        border-bottom: 2px solid transparent;
+        transition: all 200ms ease-in;
+      }
+
+      &:hover {
+        a {
+          @include border-bottom($dark_blue_text);
+        }
+
+        &:nth-child(2) {
+          a {
+            color: $light_blue;
+          }
+        }
+
+        &:nth-child(3) {
+          a {
+            color: $dark_red;
+          }
+        }
+      }
+
+      &:nth-child(2) {
+        a {
+          @include border-bottom($light_blue);
+        }
+      }
+
+      &:nth-child(3) {
+        a {
+          @include border-bottom($dark_red);
+        }
+      }
+    }
+
+    &.Hover .ListItem:not(:hover) {
+      a {
+        @include border-bottom(transparent);
+      }
+    }
+  }
+}

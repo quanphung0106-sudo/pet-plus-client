@@ -1,4 +1,4 @@
-import { Box} from '@mui/material'
+import { Box } from '@mui/material'
 import { GhostButton, PrimaryButton, TextButton } from 'components/Button'
 import React from 'react'
 import { useNotificationStore } from 'store/notification-store'

@@ -5,6 +5,8 @@ import AppRouter from 'router'
 import { SnackbarProvider } from 'notistack'
 import { NotificationProvider } from './components/Notification'
 import { StyledEngineProvider } from 'themeProvider/StyledEngineProvider'
+import './styles/globals.scss'
+import './styles/reset_styles.scss'
 
 function App() {
   return (
