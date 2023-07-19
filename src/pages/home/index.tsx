@@ -1,4 +1,5 @@
-import { Box, Button } from '@mui/material'
+import { Box} from '@mui/material'
+import { GhostButton, PrimaryButton, TextButton } from 'components/Button'
 import React from 'react'
 import { useNotificationStore } from 'store/notification-store'
 
@@ -9,7 +10,9 @@ function HomePage() {
   }
   return (
     <Box minHeight="50vh">
-      <Button onClick={handleClick}>Click me</Button>
+      <PrimaryButton onClick={handleClick}>Click me</PrimaryButton>
+      <GhostButton onClick={handleClick}>Click me</GhostButton>
+      <TextButton onClick={handleClick}>Click me</TextButton>
     </Box>
   )
 }

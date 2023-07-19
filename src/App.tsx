@@ -4,20 +4,23 @@ import theme from 'themeProvider/ThemeProvider'
 import AppRouter from 'router'
 import { SnackbarProvider } from 'notistack'
 import { NotificationProvider } from './components/Notification'
+import { StyledEngineProvider } from 'themeProvider/StyledEngineProvider'
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <SnackbarProvider
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        autoHideDuration={3000}
-        maxSnack={3}
-      >
-        <AppRouter />
-        <NotificationProvider />
-      </SnackbarProvider>
-    </ThemeProvider>
+    <StyledEngineProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <SnackbarProvider
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          autoHideDuration={3000}
+          maxSnack={3}
+        >
+          <AppRouter />
+          <NotificationProvider />
+        </SnackbarProvider>
+      </ThemeProvider>
+    </StyledEngineProvider>
   )
 }
 
