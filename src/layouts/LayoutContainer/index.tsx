@@ -1,9 +1,9 @@
 import React from 'react'
-import Header from 'layouts/Header'
-import Helmet from 'layouts/Helmet'
-import Footer from 'layouts/Footer'
 import { Navigate, Outlet, useOutlet } from 'react-router-dom'
-import { screenUrl } from 'libs/screen/screenUrl'
+import { screenUrl } from 'src/libs/screen/screenUrl'
+import Helmet from '../Helmet'
+import Header from '../Header'
+import Footer from '../Footer'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const elementWrapper = (Component: any) => {

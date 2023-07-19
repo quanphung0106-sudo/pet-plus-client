@@ -4,8 +4,8 @@ import { List, ListItem, Typography } from '@mui/material'
 import styles from './style.module.scss'
 import clsx from 'clsx'
 import { Link } from 'react-router-dom'
-import Stack from 'components/Stack'
-import { PrimaryButton, TextButton } from 'components/Button'
+import Stack from 'src/components/Stack'
+import { PrimaryButton, TextButton } from 'src/components/Button'
 
 interface NavigationListType {
   id: number

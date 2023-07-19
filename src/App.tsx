@@ -1,12 +1,12 @@
 import React from 'react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
-import theme from 'themeProvider/ThemeProvider'
-import AppRouter from 'router'
 import { SnackbarProvider } from 'notistack'
 import { NotificationProvider } from './components/Notification'
-import { StyledEngineProvider } from 'themeProvider/StyledEngineProvider'
 import './styles/globals.scss'
 import './styles/reset_styles.scss'
+import { StyledEngineProvider } from './themeProvider/StyledEngineProvider'
+import AppRouter from './router'
+import theme from './themeProvider/ThemeProvider'
 
 function App() {
   return (

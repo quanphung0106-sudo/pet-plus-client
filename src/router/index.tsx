@@ -1,7 +1,7 @@
-import HomePage from 'pages/home'
-import LayoutContainer, { elementWrapper } from 'layouts/LayoutContainer'
-import { screenUrl } from 'libs/screen/screenUrl'
+import HomePage from '../pages/home'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import LayoutContainer, { elementWrapper } from 'src/layouts/LayoutContainer'
+import { screenUrl } from 'src/libs/screen/screenUrl'
 
 const AppRouter = () => {
   return (

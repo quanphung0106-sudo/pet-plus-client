@@ -3,8 +3,8 @@ import { LoadingButton } from '@mui/lab'
 import { ButtonProps, IconButton, IconButtonProps } from '@mui/material'
 import clsx from 'clsx'
 import styles from './style.module.scss'
-import { useNotificationStore } from 'store/notification-store'
 import { ContentCopy } from '@mui/icons-material'
+import { useNotificationStore } from 'src/store/notification-store'
 
 type CopyTextProps = IconButtonProps & {
   text: string

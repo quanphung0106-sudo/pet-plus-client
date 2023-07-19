@@ -1,6 +1,6 @@
-import { ACTIVATE_STATUS } from 'libs/enums/index'
 import { Theme } from '@mui/material'
 import moment from 'moment'
+import { ACTIVATE_STATUS } from '../enums'
 
 export const formatDate = (date: string) => {
   return moment(date).format('L')
