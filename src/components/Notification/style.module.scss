@@ -1,0 +1,59 @@
+@import '../../styles/globals.scss';
+
+@mixin text-style($fontWeight, $spacing) {
+  font-size: 1.2rem;
+  letter-spacing: $spacing;
+  font-family: "Readex Pro";
+  font-weight: $fontWeight;
+}
+
+.AlertBase {
+  align-items: center;
+  border-radius: 6px;
+  user-select: none;
+
+  & > div:first-child {
+    align-items: flex-start;
+
+    &:has(.TypographyRoot:empty),
+    &:has(.AlertContentLabel:empty) {
+      align-items: center;
+    }
+  }
+
+  .AlertContent {
+    .AlertContentLabel {
+      margin-bottom: 0;
+      margin-top: 0;
+      line-height: 1.5;
+      @include text-style(500, 0.12px);
+    }
+
+    .TypographyRoot {
+      @include text-style(400, 0.1px);
+    }
+  }
+
+  & .AlertIconButton {
+    svg {
+      width: 20px;
+      color: #fff;
+    }
+  }
+
+  &.AlertSuccessRoot {
+    background-color: $default_green;
+  }
+
+  &.AlertInfoRoot {
+    background-color: $primary;
+  }
+
+  &.AlertWarningRoot {
+    background-color: $default_yellow;
+  }
+
+  &.AlertErrorRoot {
+    background-color: $default_red;
+  }
+}
