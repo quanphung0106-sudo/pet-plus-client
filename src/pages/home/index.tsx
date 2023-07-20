@@ -1,58 +1,71 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from '@mui/material'
-import React from 'react'
-import { useForm } from 'react-hook-form'
 import { GhostButton, PrimaryButton, TextButton } from 'src/components/Button'
-import { BaseTextField, ContainerInputField, LineInputField, TextAreaField } from 'src/components/TextField'
+import { BaseFormInputs, FormProvider, UseFormProvider } from 'src/components/FormProvider'
+import { FormInputEnum } from 'src/components/FormProvider/constant'
 import { useNotificationStore } from 'src/store/notification-store'
+import styles from './style.module.scss'
+import { useEffect, useRef } from 'react'
+
+interface LoginInputs extends BaseFormInputs {
+  username: string
+  password: string
+}
+
+const inputs = [
+  {
+    name: 'username',
+    type: FormInputEnum.INPUT,
+    placeholder: 'Nhập tên đăng nhập',
+    label: 'Tên đăng nhập',
+    required: { value: true, message: 'Tên đăng nhập là bắt buộc' },
+    className: styles.Input,
+  },
+  {
+    name: 'password',
+    type: FormInputEnum.PASSWORD,
+    placeholder: 'Nhập mật khẩu',
+    label: 'Mật khẩu',
+    required: { value: true, message: 'Mật khẩu là bắt buộc' },
+    className: styles.Input,
+    isShowPassword: true,
+  },
+]
+
 function HomePage() {
   const { dispatchNotification } = useNotificationStore()
+  const formRef = useRef<UseFormProvider<LoginInputs>>(null)
+
   const handleClick = () => {
     dispatchNotification('success', 'asdDSADSADASDASD')
   }
 
-  const { handleSubmit, control } = useForm<Record<string, unknown>>({
-    defaultValues: {
-      FirstName: '',
-      LastName: '',
-      Email: '',
-    },
-    mode: 'onChange',
-  })
-  const onSubmit = (data: Record<string, unknown>) => console.log(data)
+  useEffect(() => {
+    const keyDown = (e: any) => {
+      if (e.key === 'Enter') {
+        e.preventDefault()
+        onLoginClick()
+      }
+    }
+    window.addEventListener('keydown', (e) => keyDown(e))
+    return () => window.removeEventListener('keydown', (e) => keyDown(e))
+  }, [])
+
+  const onLoginClick = () => {
+    console.log(formRef.current?.getValues())
+  }
 
   return (
     <Box minHeight="50vh">
-      <PrimaryButton onClick={handleClick}>Click me</PrimaryButton>
       <GhostButton onClick={handleClick}>Click me</GhostButton>
       <TextButton onClick={handleClick}>Click me</TextButton>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <BaseTextField
-          label="Label"
-          copy
-          control={control}
-          name="FirstName"
-          rules={{ required: true }}
-        />
-        <LineInputField
-          label="Label"
-          copy
-          control={control}
-          name="LastName"
-          rules={{ required: true }}
-        />
-        <ContainerInputField
-          label="Label"
-          copy
-          control={control}
-          name="Email"
-          type="email"
-          rules={{ required: true }}
-        />
-        <PrimaryButton type="submit">Submit</PrimaryButton>
-      </form>
-
-      <TextAreaField name="Test" label="Ahihi" copy />
+      <Box onSubmit={onLoginClick}>
+        <FormProvider ref={formRef} inputs={inputs} mode="onSubmit" />
+        <PrimaryButton onClick={onLoginClick} type="submit">
+          Đăng nhập
+        </PrimaryButton>
+      </Box>
     </Box>
   )
 }

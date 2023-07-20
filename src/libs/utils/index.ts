@@ -25,3 +25,11 @@ export const handleStatus = (status: number, theme: Theme) => {
   if (status === ACTIVATE_STATUS.AWAY) return theme.palette.yellow.main
   return theme.palette.red.main
 }
+
+export const isNullOrUndefined = (value?: unknown): boolean => {
+  return value !== null || value !== undefined
+}
+
+export const isObjectEmpty = (object: Record<string, unknown> = {}): boolean => {
+  return typeof object === 'object' && (isNullOrUndefined(object) || Object.keys(object).length === 0)
+}
