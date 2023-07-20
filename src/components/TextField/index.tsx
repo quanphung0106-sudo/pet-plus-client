@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { UseControllerProps, useController } from 'react-hook-form'
 import React from 'react'
 import {
   FormHelperTextProps,
@@ -14,8 +13,7 @@ import clsx from 'clsx'
 import Stack from '../Stack'
 import { CopyTextIcon } from '../Button'
 
-type BaseInputProps = UseControllerProps<Record<string, unknown>> &
-  TextFieldProps &
+type BaseInputProps = TextFieldProps &
   InputLabelProps &
   FormHelperTextProps & {
     isLabelInline?: boolean
@@ -41,16 +39,7 @@ const FormHelperTextClasses = {
   error: styles.HelperTextError,
 }
 
-export const BaseTextField = (props: BaseInputProps) => {
-  const {
-    field,
-    fieldState,
-    formState: { errors },
-  } = useController({
-    name: props.name,
-    control: props.control,
-  })
-
+export const BaseTextField = (props: any) => {
   const {
     isLabelInline,
     className,
@@ -70,12 +59,11 @@ export const BaseTextField = (props: BaseInputProps) => {
           margin: '30px',
         }}
         {...rest}
-        {...field}
         label={
           copy ? (
             <Stack className={styles.LabelCopyTextWrap}>
               {!isLabelInline && label}
-              <CopyTextIcon text={(field.value as string) || ''} />
+              <CopyTextIcon text={(rest.value as string) || ''} />
             </Stack>
           ) : (
             !isLabelInline && label
@@ -113,7 +101,7 @@ export const LineInputField = (props: BaseInputProps) => {
   )
 }
 
-export const ContainerInputField = (props: BaseInputProps) => {
+export const ContainerInputField = (props: any) => {
   return (
     <BaseTextField
       {...props}
