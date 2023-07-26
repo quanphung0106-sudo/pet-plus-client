@@ -1,14 +1,12 @@
-import { Controller } from 'react-hook-form'
-
-import { FieldValues, UseFormReturn } from 'react-hook-form'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { IconButton, InputAdornment } from '@mui/material'
+import clsx from 'clsx'
+import { ReactNode, useState } from 'react'
+import { Controller, FieldValues, UseFormReturn } from 'react-hook-form'
 import { Control } from '.'
 import { ContainerInputField } from '../TextField'
-import { useState } from 'react'
 import { FormInputEnum } from './constant'
-import { IconButton, InputAdornment } from '@mui/material'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
-
-interface Props<T extends FieldValues> {
+export interface Props<T extends FieldValues> {
   control: Control<T>
   form: UseFormReturn<T>
 }
@@ -16,6 +14,7 @@ interface Props<T extends FieldValues> {
 export const FormTextField = <T extends FieldValues>(props: Props<T>) => {
   const { control, form } = props
   const [isShow, setIsShow] = useState(false)
+  const error = form.formState.errors[control.name]
 
   const renderPasswordIcon = (isShowPassword: boolean, type: string) => {
     if (isShowPassword && type === FormInputEnum.PASSWORD) {
@@ -31,10 +30,9 @@ export const FormTextField = <T extends FieldValues>(props: Props<T>) => {
     }
   }
 
-  console.log(form.formState.errors)
   return (
     <Controller
-      defaultValue={control.defaultValue}
+      defaultValue={control.defaultValue ?? ''}
       rules={{
         maxLength: control.maxLength,
         minLength: control.minLength,
@@ -48,27 +46,27 @@ export const FormTextField = <T extends FieldValues>(props: Props<T>) => {
       render={({ field }) => {
         return (
           <ContainerInputField
+            inputRef={field.ref}
             disabled={control.disabled}
-            label={control.label}
-            className={control.className}
-            placeholder={control.placeholder}
-            error={true}
-            helperText={'Hello'}
-            ref={field.ref}
             value={field.value}
+            isLabelInline={control.isLabelInline}
+            label={control.label}
+            copy={control?.copy}
+            id={control.name}
             onChange={field.onChange}
-            id={field.name}
-            copy={control.copy}
-            onBlur={({ target }: { target: { value: string } }) => {
-              target.value && form.setValue(field.name, target.value.trim() as any)
+            onBlur={(event: any) => {
+              event.target.value && form.setValue(field.name, event.target.value.trim() as any)
               field.onBlur()
             }}
-            isLabelInline={control.isLabelInline}
             type={isShow ? FormInputEnum.INPUT : control.type}
+            helperText={error?.message as ReactNode}
+            error={Boolean(error)}
+            className={clsx(control.className)}
+            placeholder={control.placeholder}
             InputProps={renderPasswordIcon(!!control.isShowPassword, control.type)}
             inputProps={{
-              min: control?.min?.value,
-              max: control?.max?.value,
+              min: control.min?.value,
+              max: control.max?.value,
               autoComplete: 'new-password',
             }}
           />

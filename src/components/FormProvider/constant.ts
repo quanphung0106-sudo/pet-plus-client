@@ -1,5 +1,6 @@
 export enum FormInputEnum {
   INPUT = 'input',
+  EMAIL = 'email',
   MULTILINE = 'multiline',
   NUMBER = 'number',
   SELECT = 'select',

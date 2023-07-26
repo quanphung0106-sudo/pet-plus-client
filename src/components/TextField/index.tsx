@@ -39,7 +39,7 @@ const FormHelperTextClasses = {
   error: styles.HelperTextError,
 }
 
-export const BaseTextField = (props: any) => {
+export const BaseTextField = (props: BaseInputProps) => {
   const {
     isLabelInline,
     className,
@@ -59,6 +59,11 @@ export const BaseTextField = (props: any) => {
           margin: '30px',
         }}
         {...rest}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault()
+          }
+        }}
         label={
           copy ? (
             <Stack className={styles.LabelCopyTextWrap}>
@@ -101,7 +106,7 @@ export const LineInputField = (props: BaseInputProps) => {
   )
 }
 
-export const ContainerInputField = (props: any) => {
+export const ContainerInputField = (props: BaseInputProps) => {
   return (
     <BaseTextField
       {...props}
@@ -110,6 +115,7 @@ export const ContainerInputField = (props: any) => {
       InputProps={{
         classes: {
           ...InputBaseClasses,
+          notchedOutline: styles.NotchedOutline,
         },
         ...props.InputProps,
       }}

@@ -1,12 +1,20 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// import { forwardRef } from 'react'
-
-import { FieldValues, Path, UseFormReturn, ValidationMode, useForm } from 'react-hook-form'
-import { FormInputEnum } from './constant'
+import { ForwardedRef, MutableRefObject, forwardRef, useEffect } from 'react'
+import {
+  FieldValues,
+  Path,
+  PathValue,
+  UseFormReturn,
+  ValidationMode,
+  useForm,
+} from 'react-hook-form'
+import { isObjectEmpty } from 'src/libs/utils'
+import { DataDropdown } from 'src/pages/home'
 import { useDebouncedCallback } from 'use-debounce'
+import { FormCheckbox } from './FormCheckbox'
 import { FormTextField } from './FormControl'
-import { ForwardedRef, forwardRef, useEffect, MutableRefObject } from 'react'
+import { FormSelect } from './FormSelect'
+import { FormInputEnum } from './constant'
+import { FormFileSelect } from './FormFileSelect'
 
 export type BaseFormInputs = Record<string, any>
 
@@ -30,6 +38,13 @@ export interface Control<T> {
   disabled?: boolean
   isLabelInline?: boolean
   copy?: boolean
+  defaultChecked?: PathValue<T, Path<T>> | undefined
+  data?: string | DataDropdown[]
+  dropdownURL?: string
+  fileConfigure?: {
+    allowedExtensions?: Array<string>
+    maxSize?: number
+  }
 }
 
 interface Props<T extends FieldValues = FieldValues> {
@@ -46,11 +61,13 @@ const FormWrapper = <T extends FieldValues>(
   const { inputs, mode = 'onSubmit', handleErrors, handleFieldsChange } = props
   const form = useForm<T>({ mode: mode })
 
-  console.log(form)
+  useEffect(() => {
+    handleErrors && handleErrors(!isObjectEmpty(form.formState.errors))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.formState])
 
   useEffect(() => {
     if (ref) (ref as MutableRefObject<UseFormReturn<T>>).current = form
-    
   })
 
   const handleChange = useDebouncedCallback(() => {
@@ -64,7 +81,14 @@ const FormWrapper = <T extends FieldValues>(
           case FormInputEnum.INPUT:
           case FormInputEnum.NUMBER:
           case FormInputEnum.PASSWORD:
+          case FormInputEnum.EMAIL:
             return <FormTextField key={i.name} control={i} form={form} />
+          case FormInputEnum.CHECKBOX:
+            return <FormCheckbox key={i.name} control={i} form={form} />
+          case FormInputEnum.SELECT:
+            return <FormSelect key={i.name} control={i} form={form} />
+          case FormInputEnum.FILE:
+            return <FormFileSelect key={i.name} control={i} form={form} />
           default:
             break
         }
@@ -74,4 +98,3 @@ const FormWrapper = <T extends FieldValues>(
 }
 
 export const FormProvider = forwardRef<any, Props>(FormWrapper)
-// export const FormProvider
