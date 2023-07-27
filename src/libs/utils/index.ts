@@ -31,5 +31,23 @@ export const isNullOrUndefined = (value?: unknown): boolean => {
 }
 
 export const isObjectEmpty = (object: Record<string, unknown> = {}): boolean => {
-  return typeof object === 'object' && (isNullOrUndefined(object) || Object.keys(object).length === 0)
+  return (
+    typeof object === 'object' && (isNullOrUndefined(object) || Object.keys(object).length === 0)
+  )
+}
+
+export const formatBytes = (bytes: number, decimals: number = 2) => {
+  console.log(bytes, decimals)
+  if (!+bytes) return '0 B'
+
+  const kb = 1024
+  const decimal = decimals < 0 ? 0 : decimals
+  const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+
+  //Chia logarit tự nhiên cơ số kb của bytes(=52428800) => 2.564385618977472.
+  //Bởi vì lấy giá trị kb(=1024) mũ i(=2.564385618977472) thì sẽ ra chính kết quả của bytes
+  //Sử dụng Math.floor để làm tròn một số xuống dưới => = 2
+  // Muốn chuyển byte về MB sẽ phải chia 2 lần cho 1024. Vậy công thức dưới tính ra + Math.floor => = Số lần phải chia là 2
+  const i = Math.floor(Math.log(bytes) / Math.log(kb))
+  return `${parseFloat((bytes / Math.pow(kb, i)).toFixed(decimal))} ${sizes[i]}`
 }
