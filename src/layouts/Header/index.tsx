@@ -3,7 +3,7 @@ import { Logo } from '../../libs/assets/images/index'
 import { List, ListItem, Typography } from '@mui/material'
 import styles from './style.module.scss'
 import clsx from 'clsx'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import Stack from 'src/components/Stack'
 import { PrimaryButton, TextButton } from 'src/components/Button'
 
@@ -93,7 +93,9 @@ const Header = () => {
         </List>
         <Stack className={styles.HeaderCta}>
           <TextButton>登録</TextButton>
-          <PrimaryButton>ログイン</PrimaryButton>
+          <NavLink to="/login">
+            <PrimaryButton>ログイン</PrimaryButton>
+          </NavLink>
         </Stack>
       </Stack>
       <Stack component="nav" className={styles.Navigation}>

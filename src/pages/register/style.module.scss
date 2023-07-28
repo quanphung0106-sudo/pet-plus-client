@@ -1,0 +1,11 @@
+.Input {
+    margin: 0;
+    margin-bottom: 35px;
+    width: 100%;
+}
+
+div:has(>.Input) {
+    &:last-child .Input {
+        margin-bottom: 10px;
+    }
+}

@@ -37,7 +37,6 @@ export const isObjectEmpty = (object: Record<string, unknown> = {}): boolean => 
 }
 
 export const formatBytes = (bytes: number, decimals: number = 2) => {
-  console.log(bytes, decimals)
   if (!+bytes) return '0 B'
 
   const kb = 1024
