@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { CSSProperties } from 'react'
 import { LoadingButton } from '@mui/lab'
 import { ButtonProps, IconButton, IconButtonProps } from '@mui/material'
 import clsx from 'clsx'
 import styles from './style.module.scss'
-import { ContentCopy } from '@mui/icons-material'
+import { ContentCopy, Refresh } from '@mui/icons-material'
 import { useNotificationStore } from 'src/store/notification-store'
 
 type CopyTextProps = IconButtonProps & {
@@ -57,3 +58,17 @@ export const CopyTextIcon = (props: CopyTextProps) => {
     </IconButton>
   )
 }
+
+// export const RefreshButton = (props: { id: string; changeQuery?: boolean }) => {
+//   const onQuery = useListViewStore((store) => store.onQuery)
+
+//   return (
+//     <IconButton
+//       onClick={() => {
+//         onQuery(props.id, {}, true, props.changeQuery)
+//       }}
+//       className={styles.btnRefresh}>
+//       <Refresh fontSize={'small'} />
+//     </IconButton>
+//   )
+// }

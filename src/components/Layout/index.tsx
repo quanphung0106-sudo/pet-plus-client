@@ -66,6 +66,7 @@ export function Layout(props: Props) {
     } else {
       dispatchAction(true)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [windowSize[0]])
 
   return (

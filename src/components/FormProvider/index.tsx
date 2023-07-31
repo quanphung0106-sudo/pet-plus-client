@@ -90,7 +90,7 @@ const FormWrapper = <T extends FieldValues>(
           case FormInputEnum.FILE:
             return <FormFileSelect key={i.name} control={i} form={form} />
           default:
-            break
+            return null
         }
       })}
     </form>

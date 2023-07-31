@@ -34,6 +34,7 @@ export const FormSelect = <T extends FieldValues>(props: Props<T>) => {
 
   useEffect(() => {
     setValue(data.find((d) => d.userId === control.defaultValue))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [control.defaultValue])
 
   return (
