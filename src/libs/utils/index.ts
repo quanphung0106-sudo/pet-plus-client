@@ -2,6 +2,28 @@ import { Theme } from '@mui/material'
 import moment from 'moment'
 import { ACTIVATE_STATUS } from '../enums'
 
+export const setCookie = (cname: string, cValue: string, expIns: string) => {
+  const expires = 'expires=' + expIns
+  document.cookie = cname + '=' + cValue + ';' + expires + ';path=/'
+}
+
+export const getCookie = (cname: string) => {
+  const name = cname + '='
+  const decodeCookie = decodeURIComponent(document.cookie)
+  const ca = decodeCookie.split(';')
+
+  for (let index = 0; index < ca.length; index++) {
+    let c = ca[index]
+    while (c.charAt(0) === ' ') {
+      c = c.substring(1)
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length)
+    }
+  }
+  return ''
+}
+
 export const formatDate = (date: string) => {
   return moment(date).format('L')
 }

@@ -6,6 +6,7 @@ import { BaseFormInputs, FormProvider, UseFormProvider } from 'src/components/Fo
 import { FormInputEnum } from 'src/components/FormProvider/constant'
 import { useNotificationStore } from 'src/store/notification-store'
 import styles from './style.module.scss'
+import { Layout } from 'src/components/Layout'
 interface LoginInputs extends BaseFormInputs {
   username: string
   password: string
@@ -115,7 +116,7 @@ function HomePage() {
   }
 
   return (
-    <Box minHeight="50vh">
+    <Layout>
       <GhostButton onClick={handleClick}>Click me</GhostButton>
       <TextButton onClick={handleClick}>Click me</TextButton>
       <Box onSubmit={onLoginClick}>
@@ -125,13 +126,13 @@ function HomePage() {
         </PrimaryButton>
         B
       </Box>
-    </Box>
+    </Layout>
   )
 }
 
 HomePage.PageProps = {
   title: 'Trang',
-  showHeader: true,
+  showHeader: false,
   showFooter: true,
 }
 
